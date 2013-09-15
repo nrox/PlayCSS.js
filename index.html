@@ -3,9 +3,11 @@
 <head>
     <title>Play with CSS</title>
     <style>
-        #target {
+
+        .element {
             border: 1px solid black;
         }
+
         ul {
             list-style-type: none;
         }
@@ -14,50 +16,68 @@
             padding: 0px 5px 0px 5px;
             border-radius: 3px;
         }
+
         li:hover {
             cursor: pointer;
             background-color: lightgray;
         }
 
-        #selectors {
+        #selectors, #buttons {
             opacity: 0.9;
             position: fixed;
-            top: 0px;
-            right: 0px;
             margin: 5px;
             background-color: #eee;
             border: 10px solid #ddd;
             border-radius: 10px;
         }
-        .selected {
-            background-color: gray;
+
+        #selectors {
+            top: 0px;
+            right: 0px;
         }
-        td {
-            padding: 5px;
+        #buttons {
+            bottom: 0px;
+            right: 0px;
         }
 
-        #value {
-            min-width: 150px;
-            margin: 5px -40px 5px 5px;
+        .selected {
+            background-color: #ccc;
+        }
+
+        td[propPicker] * {
+            width: 90%;
+            margin: 0px 5px 0px 5px;
+        }
+
+        td[propName] {
+            padding: 0px 15px;
+        }
+
+        td[propValue] {
+            min-width: 100px;
+            color: gray;
         }
     </style>
     <script src='lib/jquery-1.10.2.js'></script>
     <script src='lib/underscore.js'></script>
-    <script src='events.js'></script>
-    <script src='playcss.js'></script>
+    <script src='clicks.js'></script>
+    <script src='play.js'></script>
+    <script src='pickers.js'></script>
 </head>
 <body>
 <table id="selectors">
-    <tr>
-        <td><div id='value'></div><div id='valueText'></div></td>
-        <td><ul id='select'></ul></td>
-    </tr>
 </table>
-    <div id='target'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-    <script src='test.js'></script>
+<div id="buttons">
+</div>
+<div id='target' contenteditable="true" class="element">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+    ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+<div id='target2' contenteditable="true" class="element">
+    olore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+<script src='test.js'></script>
 </body>
 </html>

@@ -1,27 +1,22 @@
-function Interpreter (options){
-    this.propertySelect = options.propertySelect || "#select";
+function ClickInterpreter (options){
     this.targetSelector = options.targetSelector || "#target";
     this.listening = {};
-    this.current = null;
     this.player = options;
 }
 
-Interpreter.prototype.listen = function(){
+ClickInterpreter.prototype.listen = function(){
     var _this = this;
     $(this.targetSelector).on('click', function(evt){
         var simple = _this.simplifyClick(evt);
-        _this.assign(simple);
-        if (_this.current){
-            $(_this.propertySelect).val(_this.current);
-            _this.player.triggerSelection(_this.current);
-        }
-    });
-    $(this.targetSelector).on('select', function(evt){
-        var simple = _this.simplifySelect(evt);
+        $("[propName]").removeClass("selected");
+        var possible = _this.assign(simple);
+        _.each(possible, function(prop){
+            $("[propName='" + prop + "']").addClass("selected");
+        });
     });
 };
 
-Interpreter.prototype.simplifyClick = function (evt){
+ClickInterpreter.prototype.simplifyClick = function (evt){
     var r = {};
     r.type = evt.type;
     r.x = Math.round(100*evt.offsetX/evt.target.offsetWidth);
@@ -56,30 +51,24 @@ Interpreter.prototype.simplifyClick = function (evt){
     return r;
 };
 
-Interpreter.prototype.simplifySelect = function (evt){
+ClickInterpreter.prototype.simplifySelect = function (evt){
     var r = {};
     r.type = evt.type;
     return r;
 };
 
-Interpreter.prototype.add = function (name, conditions){
+ClickInterpreter.prototype.add = function (name, conditions){
     this.listening[name] = conditions || {};
 };
 
-Interpreter.prototype.assign = function (simple){
+ClickInterpreter.prototype.assign = function (simple){
     var _this = this;
-    var a = _.filter(_.keys(this.listening), function(key){
+    return _.filter(_.keys(this.listening), function(key){
         var conditions = _this.listening[key];
         return _.size(conditions) && _.every(conditions, function(value, name){
               return simple[name] == value;
         });
     });
-    if (a) {
-        this.current = a[(a.indexOf(this.current) + 1) % a.length];
-    } else {
-        this.current = null;
-    }
-    return this.current;
 };
 
 
