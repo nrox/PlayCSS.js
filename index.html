@@ -6,16 +6,53 @@
         #target {
             border: 1px solid black;
         }
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 0px 5px 0px 5px;
+            border-radius: 3px;
+        }
+        li:hover {
+            cursor: pointer;
+            background-color: lightgray;
+        }
+
+        #selectors {
+            opacity: 0.9;
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            margin: 5px;
+            background-color: #eee;
+            border: 10px solid #ddd;
+            border-radius: 10px;
+        }
+        .selected {
+            background-color: gray;
+        }
+        td {
+            padding: 5px;
+        }
+
+        #value {
+            min-width: 150px;
+            margin: 5px -40px 5px 5px;
+        }
     </style>
     <script src='lib/jquery-1.10.2.js'></script>
     <script src='lib/underscore.js'></script>
+    <script src='events.js'></script>
     <script src='playcss.js'></script>
 </head>
 <body>
-    <select id='select'></select>
-    <br />
-    <div id='value'></div>
-    <br />
+<table id="selectors">
+    <tr>
+        <td><div id='value'></div><div id='valueText'></div></td>
+        <td><ul id='select'></ul></td>
+    </tr>
+</table>
     <div id='target'>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam,
